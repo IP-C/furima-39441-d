@@ -25,10 +25,9 @@
 - `first_name_kana`: カタカナでの名前
 - `birth_date`: 誕生日 (年・月・日を統合して保存)
 
-### アソシエーション
-- User（ユーザー）と Address（発送先情報）は1対多の関係です。1人のユーザーは複数の発送先情報を持つことができます。Userモデルに`has_many :addresses`というアソシエーションを追加しましょう。
-- User（ユーザー）と Product（商品）も1対多の関係です。1人のユーザーは複数の商品を出品できます。Userモデルに`has_many :products`というアソシエーションを追加しましょう。
-- User（ユーザー）と Order（購入情報）も1対多の関係です。1人のユーザーは複数の購入情報を持つことができます。Userモデルに`has_many :orders`というアソシエーションを追加しましょう。
+### Association
+- has_many :products
+- has_many :orders
 
 ## items テーブル
 
@@ -43,8 +42,8 @@
 | condition_id     | integer    | null: false   |
 | shipping_id      | integer    | null: false   |
 | prefecture_id    | integer    | null: false   |
-| delivery_days    | integer    | null: false   |
-| user             | bigint     | foreign key   |
+| delivery_day_id  | integer    | null: false   |
+| user_id          | references | null: false   |
 
 - `title`: 商品名
 - `description`: 商品の説明
@@ -56,13 +55,12 @@
 - `delivery_days`: 発送までの日数
 - `user`: 商品を出品したユーザー (外部キー, Usersテーブルとの関連)
 
-### アソシエーション
-- 商品テーブル (`items`) とカテゴリーテーブル (`categories`) の関連を設定しましょう。`belongs_to :category` というアソシエーションを `Item` モデルに追加します。
-- 商品テーブル (`items`) とコンディションテーブル (`conditions`) の関連を設定しましょう。`belongs_to :condition` というアソシエーションを `Item` モデルに追加します。
-- 商品テーブル (`items`) と配送料テーブル (`shippings`) の関連を設定しましょう。`belongs_to :shipping` というアソシエーションを `Item` モデルに追加します。
-- 商品テーブル (`items`) と都道府県テーブル (`prefectures`) の関連を設定しましょう。`belongs_to :prefecture` というアソシエーションを `Item` モデルに追加します。
-- 商品テーブル (`items`) とユーザーテーブル (`users`) の関連を設定しましょう。`belongs_to :user` というアソシエーションを `Item` モデルに追加します。
-
+### Association
+- belongs_to :category
+- belongs_to :condition
+- belongs_to :shipping
+- belongs_to :prefecture
+- belongs_to :user
 
 ## orders テーブル
 
@@ -70,15 +68,12 @@
 
 | Column      | Type       | Options                        |
 | ----------- | ---------- | ------------------------------ |
-| user        | references | foreign_key: true, null: false |
-| item        | references | foreign_key: true, null: false |
+| user_id     | references | foreign_key: true, null: false |
+| item_id     | references | foreign_key: true, null: false |
 
-- `user`: 購入者のユーザー識別子 (Foreign Key, Userテーブルとの関連, belongs_to :user)
-- `item`: 購入した商品の識別子 (Foreign Key, Itemテーブルとの関連, belongs_to :item)
-
-### アソシエーション
-- 購入情報テーブル (`orders`) とユーザーテーブル (`users`) の関連を設定しましょう。`belongs_to :user` というアソシエーションを `Order` モデルに追加します。
-- 購入情報テーブル (`orders`) と商品テーブル (`items`) の関連を設定しましょう。`belongs_to :item` というアソシエーションを `Order` モデルに追加します。
+### Association
+- belongs_to :user
+- belongs_to :item
 
 ## addresses テーブル
 
@@ -100,6 +95,6 @@
 - `building`: 建物名（任意）
 - `phone_number`: 電話番号（必須）
 
-### アソシエーション
-- 発送先情報テーブル (`addresses`) とユーザーテーブル (`users`) の関連を設定しましょう。`belongs_to :user` というアソシエーションを `Address` モデルに追加します。
-- 発送先情報テーブル (`addresses`) と都道府県テーブル (`prefectures`) の関連を設定しましょう。`belongs_to :prefecture` というアソシエーションを `Address` モデルに追加します。
+### Association
+- belongs_to :user
+- belongs_to :prefecture
