@@ -26,7 +26,7 @@
 - `birth_date`: 誕生日 (年・月・日を統合して保存)
 
 ### Association
-- has_many :products
+- has_many :items
 - has_many :orders
 
 ## items テーブル
@@ -43,7 +43,7 @@
 | shipping_id      | integer    | null: false   |
 | prefecture_id    | integer    | null: false   |
 | delivery_day_id  | integer    | null: false   |
-| user_id          | references | null: false   |
+| user             | references | null: false   |
 
 - `title`: 商品名
 - `description`: 商品の説明
@@ -52,7 +52,7 @@
 - `condition_id`: 商品の状態 (外部キー, コンディションテーブルとの関連)
 - `shipping_id`: 配送料の負担 (外部キー, 配送料テーブルとの関連)
 - `prefecture_id`: 発送元の地域 (外部キー, 都道府県テーブルとの関連)
-- `delivery_days`: 発送までの日数
+- `delivery_day_id`: 発送までの日数
 - `user`: 商品を出品したユーザー (外部キー, Usersテーブルとの関連)
 
 ### Association
@@ -68,12 +68,12 @@
 
 | Column      | Type       | Options                        |
 | ----------- | ---------- | ------------------------------ |
-| user_id     | references | foreign_key: true, null: false |
-| item_id     | references | foreign_key: true, null: false |
+| user        | references | foreign_key: true, null: false |
+| item        | references | foreign_key: true, null: false |
 
 ### Association
 - belongs_to :user
-- belongs_to :item
+- belongs_to :items
 
 ## addresses テーブル
 
@@ -96,5 +96,27 @@
 - `phone_number`: 電話番号（必須）
 
 ### Association
+## addresses テーブル
+
+発送先情報を管理するテーブルです。
+
+| Column           | Type    | Options                        |
+| ---------------- | ------- | ------------------------------ |
+| postal_code      | string  | null: false                    |
+| prefecture_id    | integer | null: false                    |
+| city             | string  | null: false                    |
+| house_number     | string  | null: false                    |
+| building         | string  |                                |
+| phone_number     | string  | null: false                    |
+
+- `postal_code`: 郵便番号
+- `prefecture`: 都道府県
+- `city`: 市区町村
+- `house_number`: 番地
+- `building`: 建物名（任意）
+- `phone_number`: 電話番号（必須）
+
+### Association
 - belongs_to :user
-- belongs_to :prefecture
+- belongs_to :item
+- belongs_to :address
