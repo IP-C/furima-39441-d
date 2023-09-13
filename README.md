@@ -61,6 +61,7 @@
 - belongs_to :shipping
 - belongs_to :prefecture
 - belongs_to :user
+- belongs_to :order
 
 ## orders テーブル
 
@@ -98,6 +99,5 @@
 - `phone_number`: 電話番号（必須）
 
 ### Association
-- belongs_to :user
 - belongs_to :item
 - belongs_to :address
