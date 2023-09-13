@@ -72,42 +72,23 @@
 | item        | references | foreign_key: true, null: false |
 
 ### Association
-- belongs_to :user
-- belongs_to :items
+- belongs_to :user, foreign_key: true
+- belongs_to :item, foreign_key: true
+- has_one :address
 
 ## addresses テーブル
 
 発送先情報を管理するテーブルです。
 
-| Column           | Type    | Options                        |
-| ---------------- | ------- | ------------------------------ |
-| postal_code      | string  | null: false                    |
-| prefecture_id    | integer | null: false                    |
-| city             | string  | null: false                    |
-| house_number     | string  | null: false                    |
-| building         | string  |                                |
-| phone_number     | string  | null: false                    |
-
-- `postal_code`: 郵便番号
-- `prefecture`: 都道府県
-- `city`: 市区町村
-- `house_number`: 番地
-- `building`: 建物名（任意）
-- `phone_number`: 電話番号（必須）
-
-### Association
-## addresses テーブル
-
-発送先情報を管理するテーブルです。
-
-| Column           | Type    | Options                        |
-| ---------------- | ------- | ------------------------------ |
-| postal_code      | string  | null: false                    |
-| prefecture_id    | integer | null: false                    |
-| city             | string  | null: false                    |
-| house_number     | string  | null: false                    |
-| building         | string  |                                |
-| phone_number     | string  | null: false                    |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| order            | references | null: false                    |
+| postal_code      | string     | null: false                    |
+| prefecture_id    | integer    | null: false                    |
+| city             | string     | null: false                    |
+| house_number     | string     | null: false                    |
+| building         | string     |                                |
+| phone_number     | string     | null: false                    |
 
 - `postal_code`: 郵便番号
 - `prefecture`: 都道府県
