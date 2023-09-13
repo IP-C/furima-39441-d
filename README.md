@@ -99,5 +99,4 @@
 - `phone_number`: 電話番号（必須）
 
 ### Association
-- belongs_to :item
 - belongs_to :address
