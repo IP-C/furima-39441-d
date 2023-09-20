@@ -60,3 +60,7 @@ end
 group :production do
   gem 'pg'
 end
+
+gem 'devise'
+
+gem 'rspec-rails', '~> 5.0'
