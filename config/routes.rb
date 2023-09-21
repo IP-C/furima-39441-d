@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # ルートURLを設定
   root 'items#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  # ユーザーの詳細情報ページへのルーティングを追加
+  resources :users, only: [:new] 
+
+  # Deviseの設定
+  devise_for :users
 end
