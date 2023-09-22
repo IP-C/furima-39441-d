@@ -1,3 +1,5 @@
+# app/models/user.rb
+
 class User < ApplicationRecord
   # Deviseのモジュールを設定
   devise :database_authenticatable, :registerable,

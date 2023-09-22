@@ -64,3 +64,8 @@ end
 gem 'devise'
 
 gem 'rspec-rails', '~> 5.0'
+
+group :development, :test do
+  # 他のgemと一緒に記述されているかもしれませんが、FactoryBotを追加してください。
+  gem 'factory_bot_rails'
+end
