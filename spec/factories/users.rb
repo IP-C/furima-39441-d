@@ -3,8 +3,9 @@
 FactoryBot.define do
   factory :user do
     nickname { "ExampleUser" }
-    email { Faker::Internet.email } # Fakerを使ってランダムなメールアドレスを生成
+    email { Faker::Internet.email }
     password { "password123" }
+    password_confirmation { "password123" } # password_confirmation カラムを追加
     last_name_kana { "ヤマダ" }
     first_name_kana { "タロウ" }
     last_name_kanji { "山田" }
@@ -12,4 +13,5 @@ FactoryBot.define do
     birth_date { "1990-01-01" }
   end
 end
+
 

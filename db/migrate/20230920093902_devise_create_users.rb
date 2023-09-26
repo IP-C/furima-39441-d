@@ -13,7 +13,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.date :birth_date, null: false
 
       ## Add nickname column here
-      t.string :nickname
+      t.string :nickname, null: false
 
       ## Recoverable
       t.string   :reset_password_token
