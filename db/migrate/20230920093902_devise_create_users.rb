@@ -6,11 +6,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       ## Database authenticatable
       t.string :email, null: false
       t.string :encrypted_password, null: false
-      t.string :last_name_kanji
-      t.string :first_name_kanji
-      t.string :last_name_kana
-      t.string :first_name_kana
-      t.date :birth_date
+      t.string :last_name_kanji, null: false
+      t.string :first_name_kanji, null: false
+      t.string :last_name_kana, null: false
+      t.string :first_name_kana, null: false
+      t.date :birth_date, null: false
 
       ## Add nickname column here
       t.string :nickname

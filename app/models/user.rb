@@ -8,19 +8,16 @@ class User < ApplicationRecord
   # ニックネームのバリデーションを追加
   validates :nickname, presence: true
 
-  # メールアドレスのバリデーション
-  validates :email, presence: true, format: { with: /\A[^@\s]+@[^@\s]+\z/ }, uniqueness: true
-
   # パスワードのバリデーション
-  validates :password, presence: true, length: { minimum: 6 }, format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)/ }
+  validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)/ }
 
   # お名前カナのバリデーション
   validates :last_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/ }
   validates :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/ }
 
   # お名前（漢字）のバリデーション
-  validates :last_name_kanji, presence: true
-  validates :first_name_kanji, presence: true
+  validates :last_name_kanji, presence: true, format: { with: /\A[一-龯ぁ-んァ-ヶー－]+\z/ }
+  validates :first_name_kanji, presence: true, format: { with: /\A[一-龯ぁ-んァ-ヶー－]+\z/ }
 
   # 生年月日のバリデーション
   validates :birth_date, presence: true
