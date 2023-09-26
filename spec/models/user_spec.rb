@@ -50,7 +50,7 @@ RSpec.describe User, type: :model do
       it 'nicknameが7文字以上では登録できない' do
         @user.nickname = 'a' * 8 # nicknameを7文字以上に設定
         @user.valid?
-      end      
+      end
 
       it '重複したemailが存在する場合は登録できない' do
         # ダミーユーザーを作成
@@ -106,7 +106,48 @@ RSpec.describe User, type: :model do
         expect(@user.errors[:last_name_kanji]).to include("can't be blank")
       end
 
-      # 他の異常系テストケースも同様に追加
+      it '姓（全角）に半角文字が含まれていると登録できない' do
+        @user.last_name_kanji = '山田A'
+        @user.valid?
+        expect(@user.errors[:last_name_kanji]).to include('is invalid')
+      end
+
+      it '名（全角）が空だと登録できない' do
+        @user.first_name_kanji = ''
+        @user.valid?
+        expect(@user.errors[:first_name_kanji]).to include("can't be blank")
+      end
+
+      it '名（全角）に半角文字が含まれていると登録できない' do
+        @user.first_name_kanji = '太郎Taro'
+        @user.valid?
+        expect(@user.errors[:first_name_kanji]).to include('is invalid')
+      end
+
+      it '姓（カナ）が空だと登録できない' do
+        @user.last_name_kana = ''
+        @user.valid?
+        expect(@user.errors[:last_name_kana]).to include("can't be blank")
+      end
+
+      it '姓（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
+        @user.last_name_kana = 'やまだYamada'
+        @user.valid?
+        expect(@user.errors[:last_name_kana]).to include('is invalid')
+      end
+
+      it '名（カナ）が空だと登録できない' do
+        @user.first_name_kana = ''
+        @user.valid?
+        expect(@user.errors[:first_name_kana]).to include("can't be blank")
+      end
+
+      it '名（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
+        @user.first_name_kana = 'たろうTaro'
+        @user.valid?
+        expect(@user.errors[:first_name_kana]).to include('is invalid')
+      end
     end
   end
 end
+
