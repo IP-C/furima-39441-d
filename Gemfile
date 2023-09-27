@@ -62,3 +62,5 @@ group :production do
 end
 
 gem 'devise'
+
+gem 'net-protocol', '0.2.1'
