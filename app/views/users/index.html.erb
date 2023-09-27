@@ -1,0 +1,22 @@
+<!-- app/views/users/index.html.erb -->
+
+<h1>ユーザー一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ユーザー名</th>
+      <th>Email</th>
+      <!-- 他のユーザー属性に関するヘッダーを追加 -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <!-- 他のユーザー属性の表示 -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>

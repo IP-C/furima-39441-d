@@ -16,14 +16,8 @@ module Furima39441D
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    # Basic認証を有効にするためのコード
-    config.middleware.use Rack::Auth::Basic do |username, password|
-      # 環境変数からユーザー名とパスワードを取得
-      correct_username = 'endo'
-      correct_password = 'hiro0219'
-
-      # ユーザー名とパスワードが一致するか確認
-      username == correct_username && password == correct_password
-    end
+    
+    # Zeitwerkをclassicモードに設定し、特定のディレクトリを無視する
+    config.autoloader = :classic
   end
 end
