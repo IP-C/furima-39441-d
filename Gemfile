@@ -65,4 +65,4 @@ gem 'devise'
 
 gem 'net-protocol', '0.2.1'
 
-gem 'activehash'
+gem 'active_hash'
