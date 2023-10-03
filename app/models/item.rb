@@ -1,6 +1,6 @@
 # app/models/product.rb
 
-class Items < ApplicationRecord
+class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   validates :name, presence: true
   has_one_attached :image
