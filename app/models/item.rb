@@ -2,11 +2,12 @@
 
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  validates :item_name, presence: true, length: { maximum: 40 }
-  validates :item_info, presence: true, length: { maximum: 1000 }
-  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+  validates :item_name, presence: true, length: { maximum: 40 } 
+  validates :item_info, presence: true, length: { maximum: 1000 } 
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 } 
+  validates :category_id, presence: true
   has_one_attached :image
-  belongs_to :category 
+  belongs_to :category
   validates :category, inclusion: { in: ['---', 'メンズ', 'レディース', 'ベビー・キッズ', 'インテリア・住まい・小物', '本・音楽・ゲーム', 'おもちゃ・ホビー・グッズ', '家電・スマホ・カメラ', 'スポーツ・レジャー', 'ハンドメイド', 'その他'] }
   validates :item_condition, inclusion: { in: ['---', '新品・未使用', '未使用に近い', '目立った傷や汚れなし', 'やや傷や汚れあり', '傷や汚れあり', '全体的に状態が悪い'] }
   validates :shipping_fee, inclusion: { in: ['---', '着払い(購入者負担)', '送料込み(出品者負担)'] }

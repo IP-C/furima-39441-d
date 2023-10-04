@@ -45,7 +45,7 @@
             カテゴリー
             <span class="indispensable">必須</span>
           </div>
-          <%= f.collection_select(:category_id, Category.all, :id, :name, { prompt: 'カテゴリーを選択してください' }, { class: "select-box", id: "item-category" }) %>
+          <%= f.select :category_id, Category.all.map { |category| [category.name, category.id] }, { include_blank: '---' }, { class: "select-box", id: "item-category" } %>
           <div class="weight-bold-text">
             商品の状態
             <span class="indispensable">必須</span>
