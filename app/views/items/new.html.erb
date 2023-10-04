@@ -72,6 +72,7 @@
             <span class="indispensable">必須</span>
           </div>
           <%= f.select :prefecture_id, Prefecture.all.map { |prefecture| [prefecture.name, prefecture.id] }, { include_blank: '---' }, { class: "select-box", id: "item-prefecture" } %>
+          <div class="weight-bold-text">
             発送までの日数
             <span class="indispensable">必須</span>
           </div>
@@ -110,6 +111,18 @@
         </div>
       </div>
       <%# /販売価格 %>
+
+      <script>
+      // 価格が変更されたときに計算と表示を更新
+      $('#item-price').on('input', function() {
+      var price = parseFloat($(this).val()) || 0; // 価格を浮動小数点数に変換
+      var fee = Math.floor(price * 0.1); // 販売手数料を計算（小数点以下切り捨て）
+      var profit = price - fee; // 販売利益を計算
+
+      $('#add-tax-price').text(fee); // 販売手数料を表示
+      $('#profit').text(profit); // 販売利益を表示
+      });
+      </script>
 
       <%# 注意書き %>
       <div class="caution">
