@@ -6,9 +6,11 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)  # 正しい記述
     if @item.save
-      # 保存成功時の処理
+      # 商品の保存に成功した場合の処理
+      redirect_to @item, notice: '商品が出品されました。'
     else
-      # 保存失敗時の処理
+      # 商品の保存に失敗した場合の処理
+      render 'new'
     end
   end
 

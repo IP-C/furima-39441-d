@@ -2,7 +2,9 @@
 
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  validates :name, presence: true
+  validates :item_name, presence: true, length: { maximum: 40 }
+  validates :item_info, presence: true, length: { maximum: 1000 }
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
   has_one_attached :image
   belongs_to :category 
   validates :category, inclusion: { in: ['---', 'メンズ', 'レディース', 'ベビー・キッズ', 'インテリア・住まい・小物', '本・音楽・ゲーム', 'おもちゃ・ホビー・グッズ', '家電・スマホ・カメラ', 'スポーツ・レジャー', 'ハンドメイド', 'その他'] }
