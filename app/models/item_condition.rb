@@ -1,4 +1,4 @@
-# app/models/item_condition.rb
+# app/models/condition_id.rb
 
 class ItemCondition < ActiveHash::Base
   self.data = [

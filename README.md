@@ -35,8 +35,8 @@
 
 | Column           | Type       | Options       |
 | ---------------- | ---------- | ------------- |
-| title            | string     | null: false   |
-| description      | text       | null: false   |
+| name             | string     | null: false   |
+| item_info        | text       | null: false   |
 | price            | integer    | null: false   |
 | category_id      | integer    | null: false   |
 | condition_id     | integer    | null: false   |

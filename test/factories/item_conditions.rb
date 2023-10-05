@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :item_condition do
+  factory :condition_id do
     name { "MyString" }
   end
 end
