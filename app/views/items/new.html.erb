@@ -79,7 +79,8 @@
             配送料の負担
             <span class="indispensable">必須</span>
           </div>
-          <%= f.select :shipping_id, [['着払い(購入者負担)', '着払い(購入者負担)'], ['送料込み(出品者負担)', '送料込み(出品者負担)']], { include_blank: '---' }, { class: "select-box", id: "shipping_id" } %>
+          <%= f.select :shipping_id, Shipping.all.map { |shipping| [shipping.name, shipping.id] }, { include_blank: '---' }, { class: "select-box", id: "shipping_id" } %>
+
           <div class="weight-bold-text">
             発送元の地域
             <span class="indispensable">必須</span>
