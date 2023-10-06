@@ -8,6 +8,33 @@
   <script type="text/javascript" src="https://js.pay.jp/v1/"></script>
   <%= stylesheet_link_tag 'application', media: 'all'%>
   <%= javascript_pack_tag 'application' %>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const priceInput = document.getElementById('item-price');
+      const addTaxPrice = document.getElementById('add-tax-price');
+      const profit = document.getElementById('profit');
+
+      // ページ読み込み時に計算を行う
+      calculatePrice();
+
+      // 販売価格が変更されたときに計算を行う
+      priceInput.addEventListener('input', calculatePrice);
+
+      function calculatePrice() {
+        const price = parseInt(priceInput.value, 10);
+        if (!isNaN(price)) {
+          const tax = Math.floor(price * 0.1);
+          const profitValue = price - tax;
+          addTaxPrice.textContent = tax;
+          profit.textContent = profitValue;
+        } else {
+          addTaxPrice.textContent = '0';
+          profit.textContent = '0';
+        }
+      }
+    });
+  </script>
 </head>
 
 <body>

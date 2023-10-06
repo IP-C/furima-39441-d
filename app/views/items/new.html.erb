@@ -4,6 +4,19 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
+
+    <%# エラーメッセージを表示 %>
+    <div id="error_explanation">
+      <% if @item.errors.any? %>
+        <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+        <ul>
+          <% @item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+
     <%= form_with(model: @item, local: true) do |f| %>
       <%# 商品画像 %>
       <div class="img-upload">
@@ -66,7 +79,7 @@
             配送料の負担
             <span class="indispensable">必須</span>
           </div>
-          <%= f.select :shipping_id, [ ['着払い(購入者負担)', '着払い(購入者負担)'], ['送料込み(出品者負担)', '送料込み(出品者負担)']], { include_blank: '---' }, { class: "select-box", id: "item-shipping-fee-status" } %>
+          <%= f.select :shipping_id, [['着払い(購入者負担)', '着払い(購入者負担)'], ['送料込み(出品者負担)', '送料込み(出品者負担)']], { include_blank: '---' }, { class: "select-box", id: "shipping_id" } %>
           <div class="weight-bold-text">
             発送元の地域
             <span class="indispensable">必須</span>
@@ -112,18 +125,6 @@
       </div>
       <%# /販売価格 %>
 
-      <script>
-      // 価格が変更されたときに計算と表示を更新
-      $('#item-price').on('input', function() {
-      var price = parseFloat($(this).val()) || 0; // 価格を浮動小数点数に変換
-      var fee = Math.floor(price * 0.1); // 販売手数料を計算（小数点以下切り捨て）
-      var profit = price - fee; // 販売利益を計算
-
-      $('#add-tax-price').text(fee); // 販売手数料を表示
-      $('#profit').text(profit); // 販売利益を表示
-      });
-      </script>
-
       <%# 注意書き %>
       <div class="caution">
         <p class="sentence">
@@ -142,19 +143,6 @@
           に同意したことになります。
         </p>
       </div>
-      <%# /注意書き %>
-
-      <%# バリデーションエラーメッセージを表示 %>
-      <% if @item.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
-          <ul>
-            <% @item.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
 
       <%# 下部ボタン %>
       <div class="sell-btn-contents">
