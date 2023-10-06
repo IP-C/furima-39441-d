@@ -4,16 +4,13 @@ class Item < ApplicationRecord
   validates :name, presence: true, length: { maximum: 40 }
   validates :item_info, presence: true, length: { maximum: 1000 }
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-  
-  # カテゴリーの情報が必須であることをバリデーション
-  validates :category, presence: true, inclusion: { in: ['メンズ', 'レディース', 'ベビー・キッズ', 'インテリア・住まい・小物', '本・音楽・ゲーム', 'おもちゃ・ホビー・グッズ', '家電・スマホ・カメラ', 'スポーツ・レジャー', 'ハンドメイド', 'その他'] }
-
   has_one_attached :image
-  belongs_to :category
 
-  # カテゴリーのバリデーション
-  validates :condition_id, inclusion: { in: ['---', '新品・未使用', '未使用に近い', '目立った傷や汚れなし', 'やや傷や汚れあり', '傷や汚れあり', '全体的に状態が悪い'] }
-  validates :shipping_id, inclusion: { in: ['---', '着払い(購入者負担)', '送料込み(出品者負担)'] }
-  validates :prefecture_id, inclusion: { in: ['---', '北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県', '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県', '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県', '三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県', '鳥取県', '島根県', '岡山県', '広島県', '山口県', '徳島県', '香川県', '愛媛県', '高知県', '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県'] }
-  validates :delivery_day_id, inclusion: { in: ['---', '1~2日で発送', '2~3日で発送', '4~7日で発送'] }
+  belongs_to :category
+  validates :category_id, presence: true, inclusion: { in: Category.all.map(&:id) }
+  validates :condition_id, presence: true, inclusion: { in: ItemCondition.all.map(&:id) }
+  validates :shipping_id, presence: true, inclusion: { in: Shipping.all.map(&:id) }
+  validates :prefecture_id, presence: true, inclusion: { in: Prefecture.all.map(&:id) }
+  validates :delivery_day_id, presence: true, inclusion: { in: ScheduledDelivery.all.map(&:id) }
+
 end
