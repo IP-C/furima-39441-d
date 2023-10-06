@@ -1,14 +1,14 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   def new
-    @item = Item.new  # 正しい記述
+    @item = Item.new
   end
 
   def create
-    @item = Item.new(item_params)  # 正しい記述
+    @item = current_user.items.new(item_params)
     if @item.save
       # 商品の保存に成功した場合の処理
-      redirect_to @item, notice: '商品が出品されました。'
+      redirect_to items_url, notice: '商品が出品されました。'
     else
       # 商品の保存に失敗した場合の処理
       render 'new'
