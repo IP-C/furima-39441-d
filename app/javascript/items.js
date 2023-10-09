@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('load', () => {
   const priceInput = document.getElementById('item-price');
   const addTaxPrice = document.getElementById('add-tax-price');
   const profit = document.getElementById('profit');
@@ -16,4 +16,4 @@ document.addEventListener('DOMContentLoaded', function() {
       profit.textContent = '0';
     }
   });
-});
+})

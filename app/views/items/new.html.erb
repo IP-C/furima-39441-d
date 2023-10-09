@@ -63,7 +63,7 @@
             商品の状態
             <span class="indispensable">必須</span>
           </div>
-          <%= f.select :condition_id, ItemCondition.all.map { |condition| [condition.name, condition.id] }, { include_blank: '---' }, { class: "select-box", id: "item-sales-status" } %>
+          <%= f.select :condition_id, Condition.all.map { |condition| [condition.name, condition.id] }, { include_blank: '---' }, { class: "select-box", id: "item-sales-status" } %>
         </div>
       </div>
       <%# /商品の詳細 %>
@@ -90,7 +90,7 @@
             発送までの日数
             <span class="indispensable">必須</span>
           </div>
-          <%= f.select :delivery_day_id, ScheduledDelivery.all.map { |delivery| [delivery.name, delivery.id] }, { prompt: '---' }, { class: "select-box", id: "item-scheduled-delivery" } %>
+          <%= f.select :delivery_day_id, DeliveryDay.all.map { |delivery| [delivery.name, delivery.id] }, { prompt: '---' }, { class: "select-box", id: "item-scheduled-delivery" } %>
 
         </div>
       </div>
