@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
     @item = current_user.items.new(item_params)
     if @item.save
       # 商品の保存に成功した場合の処理
-      redirect_to items_url, notice: '商品が出品されました。'
+      redirect_to root_path, notice: '商品が出品されました。'
     else
       # 商品の保存に失敗した場合の処理
       render 'new'

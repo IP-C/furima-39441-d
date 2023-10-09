@@ -1,4 +1,6 @@
-# spec/factories/items.rb
+# spec/models/item_spec.rb
+require 'rails_helper'
+
 FactoryBot.define do
   factory :item do
     name { "Example Item" }
@@ -9,8 +11,11 @@ FactoryBot.define do
     shipping_id { 1 } # 適切な配送方法IDに変更
     prefecture_id { 1 } # 適切な都道府県IDに変更
     delivery_day_id { 1 } # 適切な配送日数IDに変更
-    user_id { 1 } # 適切なユーザーIDに変更
-    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'example.jpg')) }
+    association :user, factory: :user
+
+    after(:build) do |item|
+      item.image.attach(io: File.open(Rails.root.join('spec', 'support', 'example.jpg')), filename: 'example.jpg', content_type: 'image/jpeg')
+    end
   end
 end
 
