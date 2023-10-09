@@ -1,6 +1,4 @@
 # spec/models/item_spec.rb
-require 'rails_helper'
-
 FactoryBot.define do
   factory :item do
     name { "Example Item" }
