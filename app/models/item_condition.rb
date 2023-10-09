@@ -1,4 +1,4 @@
-class Condition < ActiveHash::Base
+class ItemCondition < ActiveHash::Base
   include ActiveHash::Associations
 
   self.data = [
