@@ -1,6 +1,7 @@
 # app/models/user.rb
 
 class User < ApplicationRecord
+  has_many :items
   # Deviseのモジュールを設定
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
