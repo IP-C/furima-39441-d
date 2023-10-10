@@ -20,5 +20,10 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :item_info, :category_id, :condition_id, :shipping_id, :prefecture_id, :delivery_day_id, :price, :image)
   end
+
+  def index
+    # ログイン状態にかかわらず、全ての商品を取得する
+    @items = Item.order(created_at: :desc)
+  end
 end
 
