@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
     const price = parseInt(priceInput.value, 10);
     if (!isNaN(price)) {
       const tax = Math.floor(price * 0.1);
-      const profitValue = price - tax;
+      const profitValue = Math.floor(price - tax); // 小数点以下を切り捨てる
       addTaxPrice.textContent = tax;
       profit.textContent = profitValue;
     } else {
