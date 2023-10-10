@@ -4,4 +4,6 @@ Rails.application.routes.draw do
 
   # Deviseの設定
   devise_for :users
+
+  resources :items, only: [:index]
 end
