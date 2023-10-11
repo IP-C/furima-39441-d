@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'items#index'
   
   # リソースとアクションの指定
-  resources :items, only: [:index, :new, :create]
+  resources :items, only: [:index, :new, :create, :show]
 
   # Deviseの設定
   devise_for :users

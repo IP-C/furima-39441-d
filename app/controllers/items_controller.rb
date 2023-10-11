@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
 
   def index
     # 全ての商品を取得
-    @items = Item.order(created_at: :desc)
+    @items = Item.all
   end
 
   private
@@ -24,4 +24,9 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :item_info, :category_id, :condition_id, :shipping_id, :prefecture_id, :delivery_day_id, :price, :image)
   end
+
+  def sold_out?
+    self.stock == 0
+  end
+
 end
