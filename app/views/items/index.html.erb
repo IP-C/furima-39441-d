@@ -3,12 +3,38 @@
   <%# 商品一覧 %>
   <div class='item-contents'>
     <h2 class='title'>ピックアップカテゴリー</h2>
-    <div class="subtitle" >
+    <div class="subtitle">
       新規投稿商品
     </div>
     <ul class='item-lists'>
-      <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
-      <% if @items.nil? || @items.empty? %>
+      <% if @items.present? %>
+        <% @items.each do |item| %>
+          <li class='list'>
+            <%= link_to items_path do %>
+              <% if item.image.attached? %>
+                <%= image_tag item.image, class: "item-img" %>
+            <% end %>
+            <div class='item-info'>
+              <h3 class='item-name'>
+                <%= item.name %>
+              </h3>
+              <div class='item-price'>
+                <span>
+                  <%= item.price %>円<br>
+                  <% if item.shipping_id.present? %>
+                    <%= Shipping.find(item.shipping_id).name %>
+                  <% end %>
+                </span>
+                <div class='star-btn'>
+                  <%= image_tag "star.png", class:"star-icon" %>
+                  <span class='star-count'>0</span>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          </li>
+        <% end %>
+      <% else %>
         <li class='list'>
           <%= link_to '#' do %>
             <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
@@ -27,33 +53,9 @@
           <% end %>
         </li>
       <% end %>
-      <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>         
-      <% @items.each do |item| %>
-        <li class='list'>
-          <%= link_to items_path do %>
-            <%= image_tag item.image, class: "item-img"%>
-            <div class='item-info'>
-              <h3 class='item-name'>
-                <%= item.name %>
-              </h3>
-              <div class='item-price'>
-                <span>
-                  <%= item.price %>円<br>
-                  <% if item.shipping_id.present? %>
-                    <%= Shipping.find(item.shipping_id).name %>
-                  <% end %>
-                 </span>
-                <div class='star-btn'>
-                  <%= image_tag "star.png", class:"star-icon" %>
-                  <span class='star-count'>0</span>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </li>
-      <% end %>
     </ul>
   </div>
+      <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>  
 
   <%# 画面上部の「人生を変えるフリマアプリ」帯部分 %>
   <div class='title-contents'>
