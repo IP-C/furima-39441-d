@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  #before_action :authenticate_user!, only: [:new, :create]
 
   def new
     @item = Item.new
@@ -15,18 +15,13 @@ class ItemsController < ApplicationController
   end
 
   def index
-    # 全ての商品を取得
-    @items = Item.all
+    @items = Item.all.order(created_at: :desc)
   end
 
   private
 
   def item_params
     params.require(:item).permit(:name, :item_info, :category_id, :condition_id, :shipping_id, :prefecture_id, :delivery_day_id, :price, :image)
-  end
-
-  def sold_out?
-    self.stock == 0
   end
 
 end
