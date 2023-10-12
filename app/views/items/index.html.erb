@@ -10,7 +10,7 @@
       <% if @items.present? %>
         <% @items.each do |item| %>
           <li class='list'>
-            <%= link_to items_path do %>
+            <%= link_to "" do %>
               <% if item.image.attached? %>
                 <%= image_tag item.image, class: "item-img" %>
             <% end %>
@@ -54,8 +54,7 @@
         </li>
       <% end %>
     </ul>
-  </div>
-      <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>  
+  </div>  
 
   <%# 画面上部の「人生を変えるフリマアプリ」帯部分 %>
   <div class='title-contents'>
