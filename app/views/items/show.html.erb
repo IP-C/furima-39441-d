@@ -9,11 +9,11 @@
     <div class="item-img-content">
       <%= image_tag @item.image, class: "item-box-img" if @item.image.attached? %>
       <!-- 商品が売れている場合は、sold outを表示 -->
-      <% if @item.sold_out? %>
-        <div class="sold-out">
-          <span>Sold Out!!</span>
-        </div>
-      <% end %>
+      <%# <% if @item.sold_out? %> %
+        <%# <div class="sold-out"> %>
+          <%# <span>Sold Out!!</span> %>
+        <%# </div> %>
+      <%# <% end %> %
       <!-- //商品が売れている場合は、sold outを表示 -->
     </div>
     <div class="item-price-box">
@@ -21,7 +21,7 @@
         ¥ <%= @item.price %> <!-- 価格を表示 -->
       </span>
       <span class="item-postage">
-        <%= @item.shipping_id %> <!-- 配送料負担を表示 -->
+        <%= shipping_fee_display(@item.shipping_id) %> <!-- 配送料負担を表示 -->
       </span>
     </div>
 
@@ -49,7 +49,7 @@
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @item.user.name %></td> <!-- 出品者名を表示 -->
+          <td class="detail-value"><%= @item.user.nickname %></td> <!-- 出品者名を表示 -->
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
@@ -61,7 +61,7 @@
         </tr>
         <tr>
           <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= @item.shipping_fee_payer %></td> <!-- 発送料の負担を表示 -->
+          <td class="detail-value"><%= shipping_fee_display(@item.shipping_id) %></td> <!-- 発送料の負担を表示 -->
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>

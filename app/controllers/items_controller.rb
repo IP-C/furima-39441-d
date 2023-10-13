@@ -14,6 +14,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+    @item = Item.find(params[:id])
+  end
+
   def index
     @items = Item.all.order(created_at: :desc)
   end
@@ -23,9 +27,4 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :item_info, :category_id, :condition_id, :shipping_id, :prefecture_id, :delivery_day_id, :price, :image)
   end
-
-  def show
-    @item = Item.find(params[:id])
-  end
-  
 end
