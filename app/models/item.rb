@@ -18,5 +18,9 @@ class Item < ApplicationRecord
   validates :shipping_id, presence: true, inclusion: { in: ->(item) { Shipping.where(id: 1..Float::INFINITY).pluck(:id) } }
   validates :prefecture_id, presence: true, inclusion: { in: ->(item) { Prefecture.where(id: 1..Float::INFINITY).pluck(:id) } }
   validates :delivery_day_id, presence: true, inclusion: { in: ->(item) { DeliveryDay.where(id: 1..Float::INFINITY).pluck(:id) } }
-
+  
+  #def sold_out?
+    # 例えば、商品の在庫が0の場合に売り切れとする
+    #self.stock == 0
+  #end
 end
