@@ -16,6 +16,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @user_is_seller = user_signed_in? && current_user == @item.user
   end
 
   def index
