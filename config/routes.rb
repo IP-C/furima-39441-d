@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
   # 商品情報の編集画面へのルーティングを設定
   get 'items/:id/edit', to: 'items#edit', as: 'edit_item'
+  
+  # 商品情報の更新アクション
+  patch 'items/:id', to: 'items#update'
 
   # Deviseの設定
   devise_for :users
