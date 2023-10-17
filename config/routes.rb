@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
   # get 'purchases/new', to: 'purchases#new', as: 'new_purchase'
 
+  # 商品情報の編集画面へのルーティングを設定
+  get 'items/:id/edit', to: 'items#edit', as: 'edit_item'
+
   # Deviseの設定
   devise_for :users
 end
