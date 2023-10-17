@@ -23,6 +23,10 @@ class ItemsController < ApplicationController
     @items = Item.all.order(created_at: :desc)
   end
 
+  def edit
+    @item = Item.find(params[:id])
+  end
+  
   private
 
   def item_params
