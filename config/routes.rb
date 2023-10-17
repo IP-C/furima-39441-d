@@ -5,9 +5,7 @@ Rails.application.routes.draw do
   get 'items', to: 'items#index'
   
   # リソースとアクションの指定
-  resources :items, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-
-  # get 'purchases/new', to: 'purchases#new', as: 'new_purchase'
+  resources :items, only: [:index, :new, :create, :show]
 
   # Deviseの設定
   devise_for :users
