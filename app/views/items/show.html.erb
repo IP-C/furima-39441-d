@@ -29,7 +29,7 @@
     <% if user_signed_in? %>
       <% if current_user == @item.user %>
         <!-- ログイン中かつ出品者が自分の商品の場合 -->
-        <%= link_to "#" do %>
+        <%= link_to new_item_path do %>
           <button>商品の編集</button>
         <% end %>
         <p class="or-text">or</p>
