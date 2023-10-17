@@ -5,18 +5,13 @@ Rails.application.routes.draw do
   get 'items', to: 'items#index'
   
   # リソースとアクションの指定
-  resources :items, only: [:index, :new, :create, :show, :update, :destroy]
+  resources :items, only: [:index, :new, :create, :show, :update, :destroy, :edit]
 
   # get 'purchases/new', to: 'purchases#new', as: 'new_purchase'
-
-  # 商品情報の編集画面へのルーティングを設定
-  get 'items/:id/edit', to: 'items#edit', as: 'edit_item'
   
   # 商品情報の更新アクション
-  patch 'items/:id', to: 'items#update'
-
+  put 'items/:id', to: 'items#update'
+  
   # Deviseの設定
   devise_for :users
 end
-
-

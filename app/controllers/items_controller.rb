@@ -29,13 +29,25 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    if @item.update(item_params)
+  
+    # フォームから送信された画像を取得
+    new_image = params[:item][:image]
+  
+    if new_image.present?
+      # 新しい画像が送信された場合、既存の画像を置き換える
+      @item.image.purge
+      @item.image.attach(new_image)
+    end
+  
+    if @item.update(item_params.except(:image))
+      # 商品情報が正常に更新された場合の処理
       redirect_to @item, notice: "商品情報が更新されました。"
     else
+      # 商品情報の更新にエラーがある場合の処理
       render 'edit'
     end
   end
-  
+
   private
 
   def item_params
