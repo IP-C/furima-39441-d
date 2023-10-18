@@ -25,25 +25,20 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    if @item.update_in_progress?
-      @item.discard_changes
-    end
-    redirect_to item_path(@item)
   end  
 
   def update
     @item = Item.find(params[:id])
-    
+  
     # フォームから送信された画像を取得
     new_image = params[:item][:image]
-    
-    # 画像が選択されていない場合、既存の画像を保持する
-    if new_image.blank?
-      @item.image.attach(@item.image.blob) if @item.image.attached?
-    else
+  
+    if new_image.present?
       # 新しい画像が送信された場合、既存の画像を置き換える
       @item.image.purge
       @item.image.attach(new_image)
+    elsif !@item.image.attached?
+      # 画像が選択されておらず、既存の画像も存在しない場合はエラーとせず、何もしない
     end
   
     if @item.update(item_params.except(:image))
@@ -53,9 +48,8 @@ class ItemsController < ApplicationController
       # 商品情報の更新にエラーがある場合の処理
       render 'edit'
     end
-  end
+  end 
   
-
   private
 
   def item_params
