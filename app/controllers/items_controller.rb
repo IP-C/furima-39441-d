@@ -29,11 +29,14 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-  
+    
     # フォームから送信された画像を取得
     new_image = params[:item][:image]
-  
-    if new_image.present?
+    
+    # 画像が選択されていない場合、既存の画像を保持する
+    if new_image.blank?
+      @item.image.attach(@item.image.blob) if @item.image.attached?
+    else
       # 新しい画像が送信された場合、既存の画像を置き換える
       @item.image.purge
       @item.image.attach(new_image)
@@ -47,6 +50,7 @@ class ItemsController < ApplicationController
       render 'edit'
     end
   end
+  
 
   private
 
