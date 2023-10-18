@@ -23,15 +23,19 @@ class ItemsController < ApplicationController
     @items = Item.all.order(created_at: :desc)
   end
 
-  def edit_item
+  def edit
     @item = Item.find(params[:id])
-    # 出品者としてログインしていないか、商品の出品者ではない場合はリダイレクト
-    if current_user == @item.user
-      render 'edit' # 編集画面に遷移
+  
+    if user_signed_in?
+      if current_user == @item.user && !@item.sold?
+        # ユーザーがログインし、出品者かつ商品が売却済みでない場合は編集ページに遷移
+      else
+        redirect_to root_path
+      end
     else
-      redirect_to item_path(@item)
+      redirect_to new_user_session_path  # ログアウトユーザーはログインページに遷移
     end
-  end      
+  end        
 
   def update
     @item = Item.find(params[:id])
