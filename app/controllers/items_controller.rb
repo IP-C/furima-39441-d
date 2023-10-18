@@ -25,7 +25,11 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-  end
+    if @item.update_in_progress?
+      @item.discard_changes
+    end
+    redirect_to item_path(@item)
+  end  
 
   def update
     @item = Item.find(params[:id])
