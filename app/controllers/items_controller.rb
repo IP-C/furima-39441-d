@@ -23,9 +23,15 @@ class ItemsController < ApplicationController
     @items = Item.all.order(created_at: :desc)
   end
 
-  def edit
+  def edit_item
     @item = Item.find(params[:id])
-  end  
+    # 出品者としてログインしていないか、商品の出品者ではない場合はリダイレクト
+    if current_user == @item.user
+      render 'edit' # 編集画面に遷移
+    else
+      redirect_to item_path(@item)
+    end
+  end      
 
   def update
     @item = Item.find(params[:id])
