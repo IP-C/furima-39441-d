@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @user_is_seller = user_signed_in? && current_user == @item.user
+
   end
 
   def index
