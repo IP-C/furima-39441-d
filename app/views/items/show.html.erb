@@ -29,10 +29,9 @@
     <% if user_signed_in? %>
       <% if current_user == @item.user %>
         <!-- ログイン中かつ出品者が自分の商品の場合 -->
-        <% if user_signed_in? && current_user == @item.user %>
-          <%= link_to edit_item_path(@item) do %>
-            <button>商品の編集</button>
-          <% end %>
+        <%= link_to edit_item_path(@item), class: "your-button-class" do %>
+          <button class="your-button-class">商品の編集</button>
+        <% end %>
         <p class="or-text">or</p>
         <!-- 削除ボタンの条件分岐も同様に -->
         <%= link_to "#", method: :delete, data: { confirm: "本当に削除しますか?" }, class: "btn-delete" do %>
