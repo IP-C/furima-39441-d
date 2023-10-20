@@ -33,7 +33,6 @@
           <%= link_to edit_item_path(@item) do %>
             <button>商品の編集</button>
           <% end %>
-        <% end %>
         <p class="or-text">or</p>
         <!-- 削除ボタンの条件分岐も同様に -->
         <%= link_to "#", method: :delete, data: { confirm: "本当に削除しますか?" }, class: "btn-delete" do %>
