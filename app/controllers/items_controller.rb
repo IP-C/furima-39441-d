@@ -23,6 +23,17 @@ class ItemsController < ApplicationController
     @items = Item.all.order(created_at: :desc)
   end
 
+  def destroy
+    @item = Item.find(params[:id])
+  
+    if current_user == @item.user
+      @item.destroy
+      redirect_to root_path, notice: "商品を削除しました。"
+    else
+      redirect_to root_path, alert: "他のユーザーの商品を削除できません。"
+    end
+  end
+
   private
 
   def item_params
