@@ -227,3 +227,8 @@
 .inc {
   font-size: 13px;
 }
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}
