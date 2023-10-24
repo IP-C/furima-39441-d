@@ -33,7 +33,7 @@
            商品の編集
         <% end %>
         <p class="or-text">or</p>
-        <%= link_to item_path(@item), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "item-delete-button btn-delete" do %>
+        <%# <%= link_to item_path(@item), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "item-delete-button btn-delete" do %> 
           削除
         <% end %>
       <% elsif current_user != @item.user %> 
