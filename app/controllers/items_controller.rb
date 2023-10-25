@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit]
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :authetnticate_user!, only: [:new, :create, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def new
     @item = Item.new
@@ -23,6 +23,15 @@ class ItemsController < ApplicationController
     @items = Item.all.order(created_at: :desc)
   end
 
+  def destroy
+    if current_user == @item.user
+      @item.destroy
+      redirect_to root_path, notice: "商品を削除しました。"
+    else
+      redirect_to root_path, alert: "他のユーザーの商品を削除できません。"
+    end
+  end
+  
   def edit
     if current_user == @item.user
       # ユーザーがログインし、出品者かつ商品が売却済みでない場合は編集ページに遷移

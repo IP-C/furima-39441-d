@@ -24,7 +24,6 @@
         <%= shipping_fee_display(@item.shipping_id) %> <!-- 配送料負担を表示 -->
       </span>
     </div>
-
     <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
     <% if user_signed_in? %>
       <% if current_user == @item.user %>
@@ -33,17 +32,17 @@
            商品の編集
         <% end %>
         <p class="or-text">or</p>
-        <%# <%= link_to item_path(@item), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "item-delete-button btn-delete" do %> 
+        <!-- 削除の部分はコメントアウトから外します -->
+        <%= link_to item_path(@item), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "item-delete-button btn-delete" do %>
           削除
         <% end %>
-      <% elsif current_user != @item.user %> 
+      <% elsif current_user != @item.user %>
         <!-- ログイン中かつ他の出品者の販売中商品の場合 -->
         <%= link_to "#" do %>
           <button>購入画面に進む</button>
         <% end %>
       <% end %>
     <% end %>
-    <!-- //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう -->
 
     <div class="item-explain-box">
       <span>商品説明</span>
@@ -115,3 +114,4 @@
 </div>
 
 <%= render "shared/footer" %>
+
