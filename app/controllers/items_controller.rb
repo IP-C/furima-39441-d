@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
     @items = Item.all.order(created_at: :desc)
   end
 
-  def set_item
+  def destroy
     @item = Item.find(params[:id])
     
     if current_user == @item.user
