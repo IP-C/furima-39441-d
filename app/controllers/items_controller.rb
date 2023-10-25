@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :destroy]
+  before_action :authetnticate_user!, only: [:new, :create, :destroy]
 
   def new
     @item = Item.new
@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
     @items = Item.all.order(created_at: :desc)
   end
 
-  def destroy
+  def set_item
     @item = Item.find(params[:id])
   
     if current_user == @item.user
